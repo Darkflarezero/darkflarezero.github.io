@@ -1,0 +1,60 @@
+body {
+    max-width: 800px;
+    margin: auto;
+    padding: 1em;
+    background-color: #EEE;
+    border: 1px solid #EEE;
+    border-radius: 1em;
+    font-family: Sans-Serif;
+}
+
+input {
+    width: 70%;
+}
+
+#reset-button {
+    position: fixed;
+    width: 100px;
+    height: 40px;
+    right: 0;
+    bottom: 0;
+    border: 1px solid gray;
+    border-radius: 0.5em;
+    margin: 1em;
+}
+
+#calc-button,
+#dot-button {
+    width: 200px;
+    height: 40px;
+    font-size: 20px;
+    border: 1px solid gray;
+    border-radius: 1em;
+    margin: 1em;
+}
+
+.section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.toggle {
+    width: 100%;
+    height: auto;
+    border: 0;
+    margin-bottom: 1em;
+}
+
+.container {
+    margin-bottom: 1em;
+    flex: 0 0 49%;
+}
+
+.button {
+    text-align: center;
+}
+
+.is-hidden {
+    display: none;
+}

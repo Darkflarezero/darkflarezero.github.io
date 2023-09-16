@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DragonFable Damage Estimator</title>
+    <link rel="stylesheet" href="src/css/main.css">
+    <script type="module" src="dist/bundle.js"></script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <h1>DragonFable Damage Estimator</h1>
+        <button id="stat-toggle" class="toggle">
+            <h2>Main Stat Modifiers</h2>
+        </button>
+        <section id="stats" class="section">
+            <div class="container">
+                <label for="str">Strength</label><br>
+                <input type="number" id="str" value="0">
+            </div>
+            <div class="container">
+                <label for="dex">Dexterity</label><br>
+                <input type="number" id="dex" value="0">
+            </div>
+            <div class="container">
+                <label for="int">Intellect</label><br>
+                <input type="number" id="int" value="0">
+            </div>
+            <div class="container">
+                <label for="boost">Boost</label><br>
+                <input type="number" id="boost" value="0">
+            </div>
+            <div class="container">
+                <label for="min-dmg">Min Damage</label><br>
+                <input type="number" id="min-dmg" value="0">
+            </div>
+            <div class="container">
+                <label for="max-dmg">Max Damage</label><br>
+                <input type="number" id="max-dmg" value="0">
+            </div>
+            <div class="container">
+                <label for="dmg">Average Damage</label><br>
+                <input type="text" id="dmg" value="0" disabled="true">
+            </div>
+            <div class="container">
+                <label for="base-dmg">Base Damage</label><br>
+                <input type="text" id="base-dmg" value="0" disabled="true">
+            </div>
+        </section>
+
+        <button id="mod-toggle" class="toggle">
+            <h2>Defensive Modifiers</h2>
+        </button>
+        <section id="modifiers" class="section">
+            <div class="container">
+                <label for="res">Resistance + All</label><br>
+                <input type="number" id="res" value="0">
+            </div>
+            <div class="container">
+                <label for="dr">Damage Reduction</label><br>
+                <input type="number" id="dr" value="0">
+            </div>
+        </section>
+
+        <button id="calc-toggle" class="toggle">
+            <h2>Damage Estimator</h2>
+        </button>
+        <section id="calc" class="section">
+            <div class="container">
+                <label for="hits">Hits</label><br>
+                <input type="number" id="hits" value="0">
+            </div>
+            <div class="container">
+                <label for="crits">Crits</label><br>
+                <input type="number" id="crits" value="0">
+            </div>
+            <div class="container">
+                <label for="dmg-total">Total Damage Taken</label><br>
+                <input type="number" id="dmg-total" value="0">
+            </div>
+            <div class="container">
+                <label for="dph-avg">Average Damage Per Non-Critical Hit</label><br>
+                <input type="text" id="dph-avg" value="0" disabled="true">
+            </div>
+            <div class="container">
+                <label for="dpc-avg">Average Damage Per Critical Hit</label><br>
+                <input type="text" id="dpc-avg" value="0" disabled="true">
+            </div>
+            <div class="container">
+                <label for="exp-dmg">Expected 100% Hit Damage</label><br>
+                <input type="text" id="exp-dmg" value="0" disabled="true">
+            </div>
+            <div class="container">
+                <label for="percent-hit">Percentage Per Hit</label><br>
+                <input type="text" id="percent-hit" value="0" disabled="true">
+            </div>
+            <div class="container">
+                <label for="percent-total">Total Percentage</label><br>
+                <input type="text" id="percent-total" value="0" disabled="true">
+            </div>
+            <div class="button">
+                <button id="calc-button" type="button">Calculate</button>
+            </div>
+        </section>
+
+        <button id="dot-toggle" class="toggle">
+            <h2>DoT Estimator</h2>
+        </button>
+        <section id="dot" class="section">
+            <div class="container">
+                <label for="min-dot-dmg">Min Displayed DoT Damage</label><br>
+                <input type="number" id="min-dot-dmg" value="0">
+            </div>
+            <div class="container">
+                <label for="max-dot-dmg">Max Displayed DoT Damage</label><br>
+                <input type="number" id="max-dot-dmg" value="0">
+            </div>
+            <div class="container">
+                <label for="avg-dot-dmg">Average Displayed DoT Damage</label><br>
+                <input type="text" id="avg-dot-dmg" value="0" disabled="true">
+            </div>
+            <div class="container">
+                <label for="exp-dot">Expected 100% DoT Damage</label><br>
+                <input type="text" id="exp-dot" value="0" disabled="true">
+            </div>
+            <div class="container">
+                <label for="dot-tick">Expected Damage Per Tick</label><br>
+                <input type="text" id="dot-tick" value="0" disabled="true">
+            </div>
+            <div class="container">
+                <label for="dot-percent">DoT Tick Percentage</label><br>
+                <input type="text" id="dot-percent" value="0" disabled="true">
+            </div>
+            <div class="button">
+                <button id="dot-button" type="button">Calculate</button>
+            </div>
+        </section>
+        <div class="button">
+            <button id="reset-button">Reset</button>
+        </div>
+    </div>
+    <footer></footer>
+</body>
+
+</html>
