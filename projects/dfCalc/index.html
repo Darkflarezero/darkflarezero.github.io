@@ -14,7 +14,7 @@
         <div class="button">
             <button id="reset-button">Reset</button>
         </div>
-        
+
         <h1>DragonFable Damage Estimator</h1>
         <h2>Modifiers</h2>
         <section>
@@ -140,6 +140,24 @@
                 <button title="Damage multiplier to DoT damage taken" class="reminder" disabled="true">?</button>
                 <br>
                 <input type="number" id="dot-def-mod" value="0" disabled="true">
+            </div>
+            <div class="container">
+                <label for="total-dmg-mod">Final Non-Crit Modifier</label>
+                <button title="Final calculated multiplier to non-critical damage after resists" class="reminder" disabled="true">?</button>
+                <br>
+                <input type="number" id="total-dmg-mod" value="0" disabled="true">
+            </div>
+            <div class="container">
+                <label for="total-crit-mod">Final Critical Modifier</label>
+                <button title="Final calculated multiplier to critical damage after resists" class="reminder" disabled="true">?</button>
+                <br>
+                <input type="number" id="total-crit-mod" value="0" disabled="true">
+            </div>
+            <div class="container">
+                <label for="total-dot-mod">Final DoT Modifier</label>
+                <button title="Final calculated multiplier to DoT damage after resists" class="reminder" disabled="true">?</button>
+                <br>
+                <input type="number" id="total-dot-mod" value="0" disabled="true">
             </div>
         </section>
 

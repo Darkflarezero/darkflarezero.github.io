@@ -20,7 +20,17 @@ const res = document.querySelector('#res');
 const dr = document.querySelector('#dr');
 
 // more stats
-
+const strMod = document.querySelector('#str-mod');
+const dexMod = document.querySelector('#dex-mod');
+const dotMod = document.querySelector('#dot-mod');
+const intMod = document.querySelector('#int-mod');
+const dmgMod = document.querySelector('#dmg-mod');
+const critMod = document.querySelector('#crit-mod');
+const defMod = document.querySelector('#def-mod');
+const dotDefMod = document.querySelector('#dot-def-mod');
+const totalDamageMod = document.querySelector('#total-dmg-mod');
+const totalCritMod = document.querySelector('#total-crit-mod');
+const totalDotMod = document.querySelector('#total-dot-mod');
 
 // damage calc 
 const hits = document.querySelector('#hits');
@@ -42,7 +52,6 @@ const dotTickPercentage = document.querySelector('#dot-percent');
 
 // variables
 let minBaseDamage, maxBaseDamage, avgBaseDamage;
-let totalDamageMod, totalDotMod, totalCritMod;
 
 // resets all parameters to 0
 const reset = () => {
@@ -70,32 +79,32 @@ const calcRatios = () => {
     baseDamage.value = `${minBaseDamage} - ${maxBaseDamage} (avg. ${avgBaseDamage})`;
 
     // apply damage mods from main stats and boost
-    const strMod = str.value * 3 / 20;
-    const dexMod = dex.value / 40;
-    const dotMod = dex.value / 4;
-    const intMod = int.value / 10;
+    strMod.value = 1 + str.value * 3 / 2000;
+    dexMod.value = 1 + dex.value / 4000;
+    dotMod.value = 1 + dex.value / 400;
+    intMod.value = 1 + int.value / 1000;
 
     // calculate mods to outgoing direct damage
-    let dmgMod = 1 + strMod / 100;
-    dmgMod *= 1 + dexMod / 100;
-    dmgMod *= 1 + boost.value / 100;
+    dmgMod.value = strMod.value;
+    dmgMod.value *= dexMod.value;
+    dmgMod.value *= 1 + boost.value / 100;
 
     // calculate mods to incoming direct damage
-    let defMod = (100 - res.value) / 100;
-    defMod *= (100 - dr.value) / 100;
+    defMod.value = (100 - res.value) / 100;
+    defMod.value *= (100 - dr.value) / 100;
 
     // calculate mod to incoming dot damage
-    const dotDefMod = (100 - res.value) / 100;
+    dotDefMod.value = (100 - res.value) / 100;
 
     // calculate mods to outgoing critical direct damage
-    let critMod = 1.75 + intMod / 100;
-    critMod *= 1 + dexMod / 100;
-    critMod *= 1 + boost.value / 100;
+    critMod.value = 0.75 + parseFloat(intMod.value);
+    critMod.value *= dexMod.value;
+    critMod.value *= 1 + boost.value / 100;
 
     // calculate final mods based on outgoing and incoming damage
-    totalDamageMod = dmgMod * defMod;
-    totalDotMod = dotMod * dotDefMod;
-    totalCritMod = critMod * defMod;
+    totalDamageMod.value = dmgMod.value * defMod.value;
+    totalCritMod.value = critMod.value * defMod.value;
+    totalDotMod.value = dotMod.value * dotDefMod.value;
 
     if (dmg.value <= 0 || avgBaseDamage <= 0 || parseInt(minDmg.value) > parseInt(maxDmg.value)) {
         return false;
@@ -123,14 +132,14 @@ const calcDamage = () => {
         const nonCritHits = hits.value - crits.value;
 
         // calculate average damage of hits and crits
-        const baseDamageValue = totalDamageTaken.value / ((nonCritHits * totalDamageMod) + (crits.value * totalCritMod));
-        const avgDmgPerHit = baseDamageValue * totalDamageMod;
-        const avgDmgPerCrit = baseDamageValue * totalCritMod;
+        const baseDamageValue = totalDamageTaken.value / ((nonCritHits * totalDamageMod.value) + (crits.value * totalCritMod.value));
+        const avgDmgPerHit = baseDamageValue * totalDamageMod.value;
+        const avgDmgPerCrit = baseDamageValue * totalCritMod.value;
 
         // how much damage a 100% attack would do
-        const minExpDmg = minDmg.value * totalDamageMod;
-        const maxExpDmg = maxDmg.value * totalDamageMod;
-        const avgExpDmg = dmg.value * totalDamageMod;
+        const minExpDmg = minDmg.value * totalDamageMod.value;
+        const maxExpDmg = maxDmg.value * totalDamageMod.value;
+        const avgExpDmg = dmg.value * totalDamageMod.value;
 
         // 1 hit as a percentage compared to 100%
         const minPercentPerHit = avgDmgPerHit / maxExpDmg * 100;
@@ -165,14 +174,14 @@ const calcDoT = () => {
         const avgDotDamage = (parseInt(minDotDamage.value) + parseInt(maxDotDamage.value)) / 2;
 
         // how much damage a 100% DoT would do
-        const minExpDot = minBaseDamage * totalDotMod;
-        const maxExpDot = maxBaseDamage * totalDotMod;
-        const avgExpDot = avgBaseDamage * totalDotMod;
+        const minExpDot = minBaseDamage * totalDotMod.value;
+        const maxExpDot = maxBaseDamage * totalDotMod.value;
+        const avgExpDot = avgBaseDamage * totalDotMod.value;;
 
         // expected damage of DoT
-        const minDotTick = minDotDamage.value * totalDotMod;
-        const maxDotTick = maxDotDamage.value * totalDotMod;
-        const avgDotTick = avgDotDamage * totalDotMod;
+        const minDotTick = minDotDamage.value * totalDotMod.value;;
+        const maxDotTick = maxDotDamage.value * totalDotMod.value;;
+        const avgDotTick = avgDotDamage * totalDotMod.value;;
 
         // DoT damage as a percentage compared to 100%
         const minDotPercent = minDotTick / avgExpDot * 100;
