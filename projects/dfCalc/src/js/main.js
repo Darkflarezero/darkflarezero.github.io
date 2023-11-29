@@ -115,15 +115,15 @@ const calcRatios = () => {
 // calculate hit damage
 const calcDamage = () => {
     if (calcRatios()) {
-        if (hits.value == 0) {
+        if (parseInt(hits.value) == 0) {
             console.log('Number of hits cannot be 0.');
             return;
         }
-        if (crits.value > hits.value) {
+        if (parseInt(crits.value) > parseInt(hits.value)) {
             console.log('Number of crits cannot exceed number of hits.');
             return;
         }
-        if (totalDamageTaken.value < 0) {
+        if (parseInt(totalDamageTaken.value) < 0) {
             console.log('Damage taken should not be less than 0.');
             return;
         }
@@ -165,7 +165,7 @@ const calcDamage = () => {
 // calculate DoT damage
 const calcDoT = () => {
     if (calcRatios()) {
-        if (minDotDamage.value > maxDotDamage.value) {
+        if (parseInt(minDotDamage.value) > parseInt(maxDotDamage.value)) {
             console.log('Minimum DoT damage cannot exceed maximum DoT damage.');
             return;
         }
