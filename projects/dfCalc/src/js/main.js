@@ -67,6 +67,7 @@ const reset = () => {
         i.value = 0;
     }
     baseDamage.value = '0 - 0 (avg. 0)';
+    dmg.value = '0% - 0% (avg. 0%)';
     expectedDamage.value = '0% - 0% (avg. 0%)';
     percentagePerHit.value = '0% - 0% (avg. 0%)';
     totalPercentage.value = '0% - 0% (avg. 0%)';
