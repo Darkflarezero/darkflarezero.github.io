@@ -14,6 +14,7 @@ const minDmg = document.querySelector('#min-dmg');
 const maxDmg = document.querySelector('#max-dmg');
 const dmg = document.querySelector('#dmg');
 const baseDamage = document.querySelector('#base-dmg');
+const damageType = document.querySelector('#dmg-type');
 
 // defensive modifiers
 const res = document.querySelector('#res');
@@ -52,6 +53,12 @@ const dotTickPercentage = document.querySelector('#dot-percent');
 
 // variables
 let minBaseDamage, maxBaseDamage, avgBaseDamage;
+let adjustedMinDamage, adjustedMaxDamage, adjustedAvgDamage;
+
+// TODO: Factor in variable mainstat/boost
+// TODO: Add stat damage only calculator option
+// TODO: Add weapon + stat dmg DoT calculator option
+
 
 // resets all parameters to 0
 const reset = () => {
@@ -68,15 +75,33 @@ const reset = () => {
 
 // calculates various important variables
 const calcRatios = () => {
-    let mainstat = parseInt(str.value);
-    if (parseInt(dex.value) > mainstat) { mainstat = dex.value; }
-    if (parseInt(int.value) > mainstat) { mainstat = int.value; }
-    dmg.value = (parseInt(minDmg.value) + parseInt(maxDmg.value)) / 2;
-    const statDmg = Math.floor(mainstat / 10);
+    let highestMainstat = parseInt(str.value);
+    if (parseInt(dex.value) > highestMainstat) { highestMainstat = dex.value; }
+    if (parseInt(int.value) > highestMainstat) { highestMainstat = int.value; }
+    const statDmg = Math.floor(highestMainstat / 10);
     minBaseDamage = minDmg.value - statDmg;
     maxBaseDamage = maxDmg.value - statDmg;
-    avgBaseDamage = dmg.value - statDmg;
+    avgBaseDamage = (parseInt(minDmg.value) + parseInt(maxDmg.value)) / 2 - statDmg;
     baseDamage.value = `${minBaseDamage} - ${maxBaseDamage} (avg. ${avgBaseDamage})`;
+
+    let typedMainstat;
+    switch (damageType.value) {
+        case 'melee':
+            typedMainstat = str.value;
+            break;
+        case 'pierce':
+            typedMainstat = dex.value;
+            break;
+        case 'magic':
+        default:
+            typedMainstat = int.value;
+            break;
+    }
+    const typedStatDmg = Math.floor(typedMainstat / 10);
+    adjustedMinDamage = minBaseDamage + typedStatDmg;
+    adjustedMaxDamage = maxBaseDamage + typedStatDmg;
+    adjustedAvgDamage = avgBaseDamage + typedStatDmg;
+    dmg.value = `${adjustedMinDamage} - ${adjustedMaxDamage} (avg. ${adjustedAvgDamage})`;
 
     // apply damage mods from main stats and boost
     strMod.value = 1 + str.value * 3 / 2000;
@@ -137,9 +162,9 @@ const calcDamage = () => {
         const avgDmgPerCrit = baseDamageValue * totalCritMod.value;
 
         // how much damage a 100% attack would do
-        const minExpDmg = minDmg.value * totalDamageMod.value;
-        const maxExpDmg = maxDmg.value * totalDamageMod.value;
-        const avgExpDmg = dmg.value * totalDamageMod.value;
+        const minExpDmg = adjustedMinDamage * totalDamageMod.value;
+        const maxExpDmg = adjustedMaxDamage * totalDamageMod.value;
+        const avgExpDmg = adjustedAvgDamage * totalDamageMod.value;
 
         // 1 hit as a percentage compared to 100%
         const minPercentPerHit = avgDmgPerHit / maxExpDmg * 100;
@@ -207,6 +232,7 @@ const init = () => {
     boost.addEventListener('change', calcRatios);
     minDmg.addEventListener('change', calcRatios);
     maxDmg.addEventListener('change', calcRatios);
+    damageType.addEventListener('change', calcRatios);
     res.addEventListener('change', calcRatios);
     dr.addEventListener('change', calcRatios);
 

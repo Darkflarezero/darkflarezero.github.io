@@ -58,10 +58,14 @@
                 <input type="number" id="max-dmg" value="0">
             </div>
             <div class="container">
-                <label for="dmg">Average Damage</label>
-                <button title="Calculated average damage" class="reminder" disabled="true">?</button>
+                <label for="dmg-type">Damage Type</label>
+                <button title="Type of damage" class="reminder" disabled="true">?</button>
                 <br>
-                <input type="text" id="dmg" value="0" disabled="true">
+                <select name="dmg-type" id="dmg-type">
+                    <option value="melee">Melee</option>
+                    <option value="pierce">Pierce</option>
+                    <option value="magic">Magic</option>
+                </select>
             </div>
             <div class="container">
                 <label for="base-dmg">Base Damage</label>
@@ -92,6 +96,12 @@
         </div>
 
         <section id="stat-toggle" class="section is-hidden">
+            <div class="container">
+                <label for="dmg">Adjusted Damage Range</label>
+                <button title="Calculated damage of the chosen type" class="reminder" disabled="true">?</button>
+                <br>
+                <input type="text" id="dmg" value="0" disabled="true">
+            </div>
             <div class="container">
                 <label for="str-mod">STR Multiplier</label>
                 <button title="Damage multiplier from STR" class="reminder" disabled="true">?</button>
