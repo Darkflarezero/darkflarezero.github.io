@@ -202,12 +202,12 @@ const calcDoT = () => {
         // how much damage a 100% DoT would do
         const minExpDot = minBaseDamage * totalDotMod.value;
         const maxExpDot = maxBaseDamage * totalDotMod.value;
-        const avgExpDot = avgBaseDamage * totalDotMod.value;;
+        const avgExpDot = avgBaseDamage * totalDotMod.value;
 
         // expected damage of DoT
-        const minDotTick = minDotDamage.value * totalDotMod.value;;
-        const maxDotTick = maxDotDamage.value * totalDotMod.value;;
-        const avgDotTick = avgDotDamage * totalDotMod.value;;
+        const minDotTick = minDotDamage.value * totalDotMod.value;
+        const maxDotTick = maxDotDamage.value * totalDotMod.value;
+        const avgDotTick = avgDotDamage * totalDotMod.value;
 
         // DoT damage as a percentage compared to 100%
         const minDotPercent = minDotTick / avgExpDot * 100;
